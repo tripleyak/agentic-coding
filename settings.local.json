@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm install:*)",
+      "Bash(cat:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(yes:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(gh repo view:*)",
+      "Bash(python filter_targets.py:*)",
+      "Bash(python3:*)",
+      "Bash(lsof:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run test:run:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "outputStyle": "default",
+  "spinnerTipsEnabled": true
+}

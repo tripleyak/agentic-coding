@@ -1,0 +1,176 @@
+{
+  "env": {
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "128000",
+    "MAX_THINKING_TOKENS": "64000"
+  },
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "Bash",
+      "WebFetch",
+      "WebSearch",
+      "TodoWrite",
+      "NotebookEdit",
+      "Task",
+      "mcp__github__*",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm install:*)",
+      "Bash(cat:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(yes:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(gh repo view:*)",
+      "Bash(python filter_targets.py:*)",
+      "Bash(python3:*)",
+      "Bash(lsof:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run test:run:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "defaultMode": "acceptEdits"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node | tail -1)/bin:$PATH\""
+          }
+        ]
+      },
+      {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before spawning subagent, verify: 1) Task has clear success criteria. 2) Task is scoped appropriately (not too broad). 3) Required context is included in prompt. Return {\"decision\": \"allow\"} if ready, or suggest refinements."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"${tool_input.file_path}\" == *.ts || \"${tool_input.file_path}\" == *.tsx || \"${tool_input.file_path}\" == *.js || \"${tool_input.file_path}\" == *.jsx ]]; then npx prettier --write \"${tool_input.file_path}\" 2>/dev/null || true; fi"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check bash output for: 1) Test failures - if found, add to TodoWrite as high priority fix. 2) Build errors - if found, diagnose root cause. 3) Lint warnings - note but continue. Return summary of issues found or {\"status\": \"clean\"} if none."
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"${tool_input.file_path}\" == *.ts || \"${tool_input.file_path}\" == *.tsx || \"${tool_input.file_path}\" == *.js || \"${tool_input.file_path}\" == *.jsx ]]; then npx prettier --write \"${tool_input.file_path}\" 2>/dev/null || true; fi"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "OVERNIGHT MODE: Check if there are remaining tasks in the queue (OVERNIGHT_TASKS.md or TodoWrite). If tasks remain and no critical failures occurred, return {\"decision\": \"continue\"} to proceed to next task. If all tasks complete or critical failure, return {\"decision\": \"stop\"} and write final summary to OVERNIGHT_LOG.md."
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Evaluate subagent progress: 1) Did it complete its assigned task? 2) Are there remaining subtasks? 3) Did it encounter blockers? If task incomplete and no blockers, return {\"decision\": \"continue\"}. If blocked or complete, return {\"decision\": \"stop\"} with summary."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/memory_session_start.py"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/memory_curate.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/session_handoff_generator.py"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "For test/build failure notifications: auto-add to TodoWrite as priority fix and attempt auto-fix if overnight mode. For completion notifications during SkillComposer: log to OVERNIGHT_LOG.md and proceed to next phase."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/memory_inject.py"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/memory_curate_transcript.py"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true,
+    "frontend-design@claude-code-plugins": true
+  },
+  "alwaysThinkingEnabled": true
+}

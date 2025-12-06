@@ -1,0 +1,30 @@
+# Claude Model Configuration
+# ENFORCE OPUS 4.5 ONLY - NO OTHER MODELS ALLOWED
+# Last updated: 2025-12-05
+
+# Default model - ALWAYS Opus 4.5
+default_model: claude-opus-4-5-20251101
+
+# All operations use Opus 4.5
+model: claude-opus-4-5-20251101
+skill_model: claude-opus-4-5-20251101
+subagent_model: claude-opus-4-5-20251101
+task_model: claude-opus-4-5-20251101
+review_model: claude-opus-4-5-20251101
+audit_model: claude-opus-4-5-20251101
+search_model: claude-opus-4-5-20251101
+exploration_model: claude-opus-4-5-20251101
+complex_model: claude-opus-4-5-20251101
+simple_model: claude-opus-4-5-20251101
+fast_model: claude-opus-4-5-20251101
+
+# Sonnet and Haiku are DISABLED
+# DO NOT USE THESE MODELS - THEY ARE NOT ALLOWED
+# sonnet: DISABLED - DO NOT USE
+# haiku: DISABLED - DO NOT USE
+
+# Version History
+versions:
+  - date: "2025-12-05"
+    model: "claude-opus-4-5-20251101"
+    notes: "Enforcing Opus 4.5 only - all other models disabled"

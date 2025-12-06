@@ -1,0 +1,73 @@
+# Claude Code Configuration Repository
+# Only track custom configuration, ignore ephemeral data
+
+# ===================
+# LARGE DATA (IGNORE)
+# ===================
+
+# Debug logs (can be huge - 29GB+)
+debug/
+
+# Memory system database (1GB+)
+memory/
+
+# Project-specific data
+projects/
+
+# External plugins (can be reinstalled)
+plugins/
+
+# File history snapshots
+file-history/
+
+# Shell snapshots
+shell-snapshots/
+
+# ===================
+# EPHEMERAL (IGNORE)
+# ===================
+
+# Session history
+history.jsonl
+
+# Todo state (internal)
+todos/
+
+# Plans (internal)
+plans/
+
+# Analytics
+statsig/
+
+# Session environment
+session-env/
+
+# IDE integration state
+ide/
+
+# Downloads (temporary)
+downloads/
+
+# ===================
+# SYSTEM FILES
+# ===================
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# ===================
+# WHAT IS TRACKED
+# ===================
+# The following ARE tracked (not in this ignore list):
+# - CLAUDE.md (global instructions)
+# - settings.json (hooks, plugins config)
+# - settings.local.json (local overrides)
+# - commands/ (slash commands)
+# - skills/ (custom skills)
+# - workflows/ (workflow documentation)
+# - hooks/ (hook scripts)
+# - config/ (configuration files)
+# - docs/ (documentation)
