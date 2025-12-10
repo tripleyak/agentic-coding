@@ -3,7 +3,7 @@
 Smart search for components, functions, types, or patterns.
 
 ## Arguments
-$ARGUMENTS = search term (e.g., "ProductCard", "handleDrop", "UserData")
+$ARGUMENTS = search term (e.g., "ProductCard", "handleDrop", "ShelfData")
 
 ## Instructions
 
@@ -41,12 +41,12 @@ grep -r "$TERM" --include="*.ts" --include="*.tsx" -l
 ## Search Results: "$TERM"
 
 ### Definitions
-- components/SomeComponent.tsx:15 - export const SomeComponent
-- types.ts:45 - interface SomeComponent
+- components/ProductCard.tsx:15 - export const ProductCard
+- types.ts:45 - interface ProductCard
 
 ### Usage (X files)
 - App.tsx
-- components/OtherComponent.tsx
+- components/ShelfComponent.tsx
 - ...
 
 ### Quick Navigation

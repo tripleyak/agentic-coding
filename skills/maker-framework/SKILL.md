@@ -1,6 +1,5 @@
 ---
 name: maker-framework
-description: Systematic decomposition and verification framework for complex multi-step tasks. Use when tackling problems requiring many sequential steps, high reliability is needed, tasks keep failing partway through, or the user wants structured decomposition with manual verification. Triggers on "decompose this task", "break down", "step by step with verification", "high reliability", "zero errors", "MAKER framework", "complex task", "many steps".
 license: MIT
 model: claude-opus-4-5-20251101
 subagent_model: claude-opus-4-5-20251101

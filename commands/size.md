@@ -6,7 +6,7 @@ Analyze bundle size and compare to targets.
 
 1. Check if a build exists:
    ```bash
-   ls -la dist/assets/*.js 2>/dev/null || ls -la build/static/js/*.js 2>/dev/null
+   ls -la dist/assets/*.js 2>/dev/null
    ```
 
 2. If no build exists, run one:
@@ -17,13 +17,13 @@ Analyze bundle size and compare to targets.
 3. Analyze the output:
    ```bash
    # List all JS files with sizes
-   ls -lh dist/assets/*.js 2>/dev/null || ls -lh build/static/js/*.js 2>/dev/null
+   ls -lh dist/assets/*.js
 
    # Get total size
-   du -sh dist/assets/ 2>/dev/null || du -sh build/static/js/ 2>/dev/null
+   du -sh dist/assets/
    ```
 
-4. Compare against common targets:
+4. Compare against targets from DEVELOPMENT_PLAN.md:
    - Initial bundle target: <500KB
    - Total target: <1MB with lazy loading
 

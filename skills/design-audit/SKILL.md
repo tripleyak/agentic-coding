@@ -1,6 +1,5 @@
 ---
 name: design-audit
-description: Comprehensive design language audit across entire application. Use this skill to scan all components, pages, and styling files to identify inconsistencies with a design system or theme. Performs parallel analysis of colors, typography, spacing, components, layout, animations, icons, and effects.
 license: MIT
 model: claude-opus-4-5-20251101
 subagent_model: claude-opus-4-5-20251101

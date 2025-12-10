@@ -1,6 +1,5 @@
 ---
 name: proactive-guide
-description: Ultra-proactive guidance system that surfaces unknown unknowns, suggests options before being asked, and expands the user's awareness of available tools, techniques, and possibilities. Designed for non-programmers learning to build with Claude.
 license: MIT
 model: claude-opus-4-5-20251101
 subagent_model: claude-opus-4-5-20251101

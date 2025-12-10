@@ -38,28 +38,28 @@ For each local import, note if it has further local imports (creates a dependenc
 - ...
 
 **Local Components (X)**
-- ./ComponentA
-- ./ComponentB
+- ./ShelfComponent
+- ./ProductCard
 
 **Types (X)**
-- ../types (TypeA, TypeB, ...)
+- ../types (Product, ShelfData, ...)
 
 **Services (X)**
-- ../services/someService
+- ../services/exportService
 
 **Hooks (X)**
-- ../hooks/useHookName
+- ../hooks/useHistory
 
 ### Imported By (X files)
 - App.tsx
-- components/OtherComponent.tsx
+- components/SellSheetGenerator.tsx
 - ...
 
 ### Dependency Chain
 ${filename}
-├── ComponentA.tsx
+├── ProductCard.tsx
 │   └── (no local deps)
-├── ComponentB.tsx
+├── ShelfComponent.tsx
 │   └── types.ts
 └── ...
 

@@ -1,6 +1,5 @@
 ---
 name: visual-qa
-description: Comprehensive visual QA and UI testing skill that captures screenshots from localhost, analyzes them with Claude's multimodal vision, and coordinates with DesignAudit for unified code-to-visual design verification. Supports both Puppeteer and Playwright with intelligent tool selection. Supports interactive browser testing, visual regression, and real-world UI/UX validation.
 license: MIT
 model: claude-opus-4-5-20251101
 subagent_model: claude-opus-4-5-20251101
