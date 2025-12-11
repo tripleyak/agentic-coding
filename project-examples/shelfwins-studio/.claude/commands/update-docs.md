@@ -97,67 +97,7 @@ After showing the report, update the files:
 - Update metrics (hooks count, test count, etc.)
 - Add new components/hooks to reference tables if significant additions
 
-### Step 5: Prune Completed Items (Optional)
-
-**Purpose:** Remove fully completed items to keep documentation lean and focused on active work.
-
-#### Completion Markers (ONLY these qualify for pruning)
-
-Items are ONLY considered complete if they have one of these **exact** markers:
-- `completed: true` (in JSON blocks)
-- `status: "completed"` or `status: "done"` or `status: "passed"`
-- `[x]` checkbox (markdown completed task)
-- `✓` or `✅` prefix
-- Phase marked as `"status": "completed"` with ALL sub-items also completed
-
-#### Items that MUST NOT be pruned
-
-**NEVER remove items with these markers:**
-- `completed: false` or no completion marker
-- `status: "in-progress"` or `status: "pending"` or `status: "planned"`
-- `[ ]` unchecked checkbox
-- Any item without an explicit completion indicator
-- Backlog items not yet started
-- Items in "Current Sprint" or "Active Phase" sections (even if some sub-items are done)
-
-#### Pruning Process
-
-1. **Scan for completed items:**
-   - In ROADMAP.md: Look for backlog items with `completed: true`
-   - In SESSION_HANDOFF.md: Look for items in `completedThisSession` older than 3 sessions
-
-2. **Before removing, verify:**
-   - Item has explicit completion marker (from list above)
-   - Item is NOT referenced by any incomplete item
-   - Item is NOT part of an incomplete phase/sprint
-
-3. **Create archive (optional):**
-   - If significant completed work, move to `docs/ARCHIVE.md` or similar
-   - Otherwise, safe to delete entirely
-
-4. **Report what was pruned:**
-   ```
-   ### Pruned Items
-   - [item description] (was: completed: true in ROADMAP.md)
-   - [item description] (was: [x] in SESSION_HANDOFF.md)
-   ```
-
-#### Safety Checks
-
-Before any pruning, run these validation checks:
-
-```bash
-# Count items before pruning
-echo "ROADMAP completed items: $(grep -c 'completed: true' ROADMAP.md || echo 0)"
-echo "ROADMAP incomplete items: $(grep -c 'completed: false' ROADMAP.md || echo 0)"
-```
-
-**ABORT pruning if:**
-- More items would be removed than remain
-- Any uncertainty about completion status
-- Item has dependencies that are still active
-
-### Step 6: Commit Changes
+### Step 5: Commit Changes
 
 After updates, commit together:
 ```bash
@@ -170,10 +110,9 @@ git commit -m "docs: Update documentation files [$(date +%Y-%m-%d)]"
 1. **ROADMAP.md is source of truth for backlog** - SESSION_HANDOFF.md pulls from it
 2. **Preserve JSON structure** - Keep the JSON blocks intact and valid
 3. **Update timestamps** - Always update "Last Updated" dates
-4. **Pruning is safe ONLY for explicit completions** - Items with `completed: true`, `[x]`, or `status: "done"` can be pruned. Items without explicit completion markers MUST be preserved.
+4. **Keep histories** - Don't delete completed items, move them to history sections
 5. **Atomic commits** - All synced files committed together
 6. **Ask before major changes** - If removing content or changing structure, confirm first
-7. **When in doubt, DON'T prune** - If uncertain whether an item is truly complete, leave it
 
 ## Quick Reference
 
@@ -186,12 +125,4 @@ npx tsc --noEmit && npm run lint && npm run test:run
 
 # Check what changed since last update
 git diff HEAD~5 --stat -- ROADMAP.md SESSION_HANDOFF.md APP_MAP.md
-
-# Preview what would be pruned (safe - doesn't modify anything)
-grep -n 'completed: true' ROADMAP.md
-grep -n '\[x\]' SESSION_HANDOFF.md
-
-# Count completed vs incomplete for safety check
-echo "Completed: $(grep -c 'completed: true' ROADMAP.md || echo 0)"
-echo "Incomplete: $(grep -c 'completed: false' ROADMAP.md || echo 0)"
 ```

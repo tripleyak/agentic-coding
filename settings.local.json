@@ -23,6 +23,8 @@
     "deny": [],
     "ask": []
   },
+  "enableAllProjectMcpServers": false,
+  "enabledMcpjsonServers": ["codanna"],
   "outputStyle": "default",
   "spinnerTipsEnabled": true
 }

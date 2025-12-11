@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "codanna": {
+      "command": "/Users/jackatlasov/.cargo/bin/codanna",
+      "args": ["serve", "--watch"]
+    }
+  }
+}
